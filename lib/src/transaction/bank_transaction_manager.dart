@@ -39,7 +39,7 @@ class BankTransactionManager extends BaseTransactionManager {
 
   Future<CheckoutResponse> _getTransactionId() async {
     String? id = await service.getTransactionId(chargeRequestBody!.accessCode);
-    if (id.isEmpty) {
+    if (id == null || id.isEmpty) {
       return notifyProcessingError('Unable to verify access code');
     }
 

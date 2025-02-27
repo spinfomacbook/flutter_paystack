@@ -131,7 +131,7 @@ abstract class BaseTransactionManager {
         .invokeMethod<String>('getAuthorization', {"authUrl": url});
 
     try {
-      Map<String, dynamic> responseMap = json.decode(result);
+      Map<String, dynamic> responseMap = json.decode(result ?? "");
       apiResponse = TransactionApiResponse.fromMap(responseMap);
     } catch (e) {}
     return _initApiResponse(apiResponse);
@@ -143,7 +143,7 @@ abstract class BaseTransactionManager {
         context: context,
         builder: (BuildContext context) => new PinWidget());
 
-    if (pin.length == 4) {
+    if (pin != null && pin.isNotEmpty && pin.length == 4) {
       return handlePinInput(pin);
     } else {
       return notifyProcessingError(
@@ -164,7 +164,7 @@ abstract class BaseTransactionManager {
           return new BirthdayWidget(message: messageText);
         });
 
-    if (birthday.isNotEmpty) {
+    if (birthday != null && birthday.isNotEmpty) {
       return handleBirthdayInput(birthday, response);
     } else {
       return notifyProcessingError(
