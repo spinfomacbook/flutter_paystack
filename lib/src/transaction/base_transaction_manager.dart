@@ -115,7 +115,7 @@ abstract class BaseTransactionManager {
                     ? response.message
                     : response.displayText));
 
-    if (otp != null && otp.isNotEmpty) {
+    if (otp.isNotEmpty) {
       return handleOtpInput(otp, response);
     } else {
       return notifyProcessingError(
@@ -130,12 +130,10 @@ abstract class BaseTransactionManager {
     String? result = await Utils.methodChannel
         .invokeMethod<String>('getAuthorization', {"authUrl": url});
 
-    if (result != null) {
-      try {
-        Map<String, dynamic> responseMap = json.decode(result);
-        apiResponse = TransactionApiResponse.fromMap(responseMap);
-      } catch (e) {}
-    }
+    try {
+      Map<String, dynamic> responseMap = json.decode(result);
+      apiResponse = TransactionApiResponse.fromMap(responseMap);
+    } catch (e) {}
     return _initApiResponse(apiResponse);
   }
 
@@ -145,7 +143,7 @@ abstract class BaseTransactionManager {
         context: context,
         builder: (BuildContext context) => new PinWidget());
 
-    if (pin != null && pin.length == 4) {
+    if (pin.length == 4) {
       return handlePinInput(pin);
     } else {
       return notifyProcessingError(
@@ -166,7 +164,7 @@ abstract class BaseTransactionManager {
           return new BirthdayWidget(message: messageText);
         });
 
-    if (birthday != null && birthday.isNotEmpty) {
+    if (birthday.isNotEmpty) {
       return handleBirthdayInput(birthday, response);
     } else {
       return notifyProcessingError(
