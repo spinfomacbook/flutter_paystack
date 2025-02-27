@@ -115,7 +115,7 @@ abstract class BaseTransactionManager {
                     ? response.message
                     : response.displayText));
 
-    if (otp.isNotEmpty) {
+    if (otp != null && otp.isNotEmpty) {
       return handleOtpInput(otp, response);
     } else {
       return notifyProcessingError(
