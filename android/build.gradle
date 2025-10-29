@@ -27,13 +27,13 @@ apply plugin: 'kotlin-android'
 android {
     namespace 'co.paystack.flutterpaystack'
     
-    compileSdkVersion 32
+    compileSdkVersion 35
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         versionCode 21
         versionName "3.0.10"
